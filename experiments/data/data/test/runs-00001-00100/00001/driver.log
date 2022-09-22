@@ -1,0 +1,13 @@
+2022-09-16 04:02:14,832 INFO     node: 803e1e544afc
+2022-09-16 04:02:14,967 INFO     planner wall-clock time: 0.13s
+2022-09-16 04:02:14,967 INFO     planner exit code: 0
+2022-09-16 04:02:15,003 INFO     exitcode_parser wall-clock time: 0.04s
+2022-09-16 04:02:15,004 INFO     exitcode_parser exit code: 0
+2022-09-16 04:02:15,042 INFO     translator_parser wall-clock time: 0.04s
+2022-09-16 04:02:15,042 INFO     translator_parser exit code: 0
+2022-09-16 04:02:15,080 INFO     single_search_parser wall-clock time: 0.04s
+2022-09-16 04:02:15,081 INFO     single_search_parser exit code: 0
+2022-09-16 04:02:15,117 INFO     parser wall-clock time: 0.03s
+2022-09-16 04:02:15,117 INFO     parser exit code: 0
+2022-09-16 04:02:15,155 INFO     planner_parser wall-clock time: 0.04s
+2022-09-16 04:02:15,156 INFO     planner_parser exit code: 0

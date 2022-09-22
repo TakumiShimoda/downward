@@ -1,0 +1,1 @@
+../../../../../../../mycode/benchmarks/gripper/domain.pddl

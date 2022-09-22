@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>test-abs</title>
+<meta name="generator" content="https://txt2tags.org">
+<style type="text/css">
+blockquote{margin: 1em 2em; border-left: 2px solid #999;
+  font-style: oblique; padding-left: 1em;}
+blockquote:first-letter{margin: .2em .1em .1em 0; font-size: 160%; font-weight: bold;}
+blockquote:first-line{font-weight: bold;}
+body{font-family: sans-serif;}
+hr{background-color:#000;border:0;color:#000;}
+hr.heavy{height:2px;}
+hr.light{height:1px;}
+img{border:0;display:block;}
+img.right{margin:0 0 0 auto;}
+img.center{border:0;margin:0 auto;}
+table{border-collapse: collapse;}
+table th,table td{padding: 3px 7px 2px 7px;}
+table th{background-color: lightgrey;}
+table.center{margin-left:auto; margin-right:auto;}
+.center{text-align:center;}
+.right{text-align:right;}
+.left{text-align:left;}
+.tableborder,.tableborder td,.tableborder th{border:1px solid #000;}
+.underline{text-decoration:underline;}
+</style>
+<style type="text/css">
+    body {
+        font-family: Ubuntu, Helvetica, Arial, sans-serif;
+    }
+    table {
+        border-collapse: collapse;
+    }
+    table th {
+        text-align: left;
+        padding-top: 5px;
+        padding-bottom: 4px;
+        background-color: #aaa;
+        color: #ffffff;
+    }
+</style>
+<script type="text/javascript">
+function toggle_element(element) {
+    if (element.style.display == "none") {
+        element.style.display = "";
+    } else {
+        element.style.display = "none";
+    }
+}
+
+function find_next(element, classname) {
+    element = element.nextSibling;
+    while(element.nodeName != classname)
+        element = element.nextSibling;
+    return element;
+}
+
+function toggle_table(toggle_button) {
+    var table = find_next(toggle_button, "TABLE");
+    toggle_element(table);
+    if (toggle_button.innerHTML == "Show table") {
+        toggle_button.innerHTML = "Hide table";
+    } else {
+        toggle_button.innerHTML = "Show table";
+    }
+}
+
+function show_table(section) {
+    heading = section.children[0];
+    var toggle_button = find_next(heading, "BUTTON");
+    var table = find_next(toggle_button, "TABLE");
+    table.style.display = "";
+    toggle_button.innerHTML = "Hide table";
+}
+
+function show_main_tables() {
+    var names = ["unexplained-errors", "info", "summary"];
+    for (var i = 0; i < names.length; i++) {
+        var section = document.getElementById(names[i]);
+        try {
+            show_table(section);
+        } catch (e) {
+            console.log("No table found for " + names[i]);
+        }
+    }
+
+    // If there is only one table, show it and hide the button.
+    var buttons = document.getElementsByTagName('button');
+    var tables = document.getElementsByTagName('table');
+    if (buttons.length == 1 && tables.length == 1) {
+        tables[0].style.display = "";
+        buttons[0].style.display = "none";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", show_main_tables);
+</script>
+</head>
+<body>
+<header>
+<hgroup>
+<h1>test-abs</h1>
+<h3>2022-09-16</h3>
+</hgroup>
+</header>
+<article>
+
+<div class="body" id="body">
+
+<ul>
+<li><strong><a href="#info" onclick="show_table(document.getElementById('info'));">Info</a></strong>
+</li>
+<li><strong><a href="#summary" onclick="show_table(document.getElementById('summary'));">Summary</a></strong>
+</li>
+<li><strong><a href="#cost" onclick="show_table(document.getElementById('cost'));">cost</a></strong>
+  <ul>
+  <li><a href="#cost-depot" onclick="show_table(document.getElementById('cost-depot'));">depot</a> <a href="#cost-grid" onclick="show_table(document.getElementById('cost-grid'));">grid</a> <a href="#cost-gripper" onclick="show_table(document.getElementById('cost-gripper'));">gripper</a>
+  </li>
+  </ul>
+</li>
+<li><strong><a href="#coverage" onclick="show_table(document.getElementById('coverage'));">coverage</a></strong>
+  <ul>
+  <li><a href="#coverage-depot" onclick="show_table(document.getElementById('coverage-depot'));">depot</a> <a href="#coverage-grid" onclick="show_table(document.getElementById('coverage-grid'));">grid</a> <a href="#coverage-gripper" onclick="show_table(document.getElementById('coverage-gripper'));">gripper</a>
+  </li>
+  </ul>
+</li>
+<li><strong><a href="#error" onclick="show_table(document.getElementById('error'));">error</a></strong>
+  <ul>
+  <li><a href="#error-error-success" onclick="show_table(document.getElementById('error-error-success'));">error-success</a> <a href="#error-depot" onclick="show_table(document.getElementById('error-depot'));">depot</a> <a href="#error-grid" onclick="show_table(document.getElementById('error-grid'));">grid</a> <a href="#error-gripper" onclick="show_table(document.getElementById('error-gripper'));">gripper</a>
+  </li>
+  </ul>
+</li>
+<li><strong><a href="#expansions" onclick="show_table(document.getElementById('expansions'));">expansions</a></strong>
+  <ul>
+  <li><a href="#expansions-depot" onclick="show_table(document.getElementById('expansions-depot'));">depot</a> <a href="#expansions-grid" onclick="show_table(document.getElementById('expansions-grid'));">grid</a> <a href="#expansions-gripper" onclick="show_table(document.getElementById('expansions-gripper'));">gripper</a>
+  </li>
+  </ul>
+</li>
+<li><strong><a href="#meet" onclick="show_table(document.getElementById('meet'));">meet</a></strong>
+  <ul>
+  <li><a href="#meet-depot" onclick="show_table(document.getElementById('meet-depot'));">depot</a> <a href="#meet-grid" onclick="show_table(document.getElementById('meet-grid'));">grid</a> <a href="#meet-gripper" onclick="show_table(document.getElementById('meet-gripper'));">gripper</a>
+  </li>
+  </ul>
+</li>
+<li><strong><a href="#total_time" onclick="show_table(document.getElementById('total_time'));">total_time</a></strong>
+  <ul>
+  <li><a href="#total_time-depot" onclick="show_table(document.getElementById('total_time-depot'));">depot</a> <a href="#total_time-grid" onclick="show_table(document.getElementById('total_time-grid'));">grid</a> <a href="#total_time-gripper" onclick="show_table(document.getElementById('total_time-gripper'));">gripper</a>
+  </li>
+  </ul>
+</li>
+</ul>
+
+<section~A~>
+<h1></h1>
+<section id="info">
+<h2>info</h2>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>algorithm</th>
+<th>local_<wbr>revision</th>
+<th>global_<wbr>revision</th>
+<th>driver_<wbr>options</th>
+<th>component_<wbr>options</th>
+</tr>
+<tr>
+<td>20.06:01-TTBBS_K=3</td>
+<td>release-20.06.0</td>
+<td>3a27ea77f85f41486c57286f5e73a5cac96cc35c</td>
+<td>['--validate', '--overall-time-limit', '30m', '--overall-memory-limit', '3584M', '--overall-time-limit', '10s', '--overall-memory-limit', '4G']</td>
+<td>['--search', 'astar(goalcount())']</td>
+</tr>
+</table>
+
+<p>
+Used nodes: {803e1e544afc}
+</p>
+
+</section>
+<section id="summary">
+<h2>summary</h2>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>Summary</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td><a href="#cost" onclick="show_table(document.getElementById('cost'));">cost - Sum</a></td>
+<td class="right"><span style="color:rgb(127,127,127)">41.00</span></td>
+</tr>
+<tr>
+<td><a href="#coverage" onclick="show_table(document.getElementById('coverage'));">coverage - Sum</a></td>
+<td class="right"><span style="color:rgb(127,127,127)">3</span></td>
+</tr>
+<tr>
+<td><a href="#error-error-success" onclick="show_table(document.getElementById('error-error-success'));">error-success - Sum</a></td>
+<td class="right"><span style="color:rgb(127,127,127)">3</span></td>
+</tr>
+<tr>
+<td><a href="#expansions" onclick="show_table(document.getElementById('expansions'));">expansions - Geometric mean</a></td>
+<td class="right"><span style="color:rgb(127,127,127)">22.63</span></td>
+</tr>
+<tr>
+<td><a href="#meet" onclick="show_table(document.getElementById('meet'));">meet - Arithmetic mean</a></td>
+<td class="right"><span style="color:rgb(127,127,127)">0.00</span></td>
+</tr>
+<tr>
+<td><a href="#total_time" onclick="show_table(document.getElementById('total_time'));">total_time - Geometric mean</a></td>
+<td class="right"><span style="color:rgb(127,127,127)">0.01</span></td>
+</tr>
+</table>
+
+</section>
+<section id="cost">
+<h2>cost</h2>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>cost</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td><a href="#cost-depot" onclick="show_table(document.getElementById('cost-depot'));">depot</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">12.00</span></td>
+</tr>
+<tr>
+<td><a href="#cost-grid" onclick="show_table(document.getElementById('cost-grid'));">grid</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">14.00</span></td>
+</tr>
+<tr>
+<td><a href="#cost-gripper" onclick="show_table(document.getElementById('cost-gripper'));">gripper</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">15.00</span></td>
+</tr>
+<tr>
+<td><strong>Sum (3)</strong></td>
+<td class="right"><span style="color:rgb(127,127,127)">41.00</span></td>
+</tr>
+</table>
+
+<p>
+Only tasks where all algorithms have a value for "cost" are considered. Each table entry gives the sum of "cost" for that domain. The bottom row reports the sum across all domains.
+</p>
+
+<section id="cost-depot">
+<h3>depot</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>cost</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>p01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">12.00</span></td>
+</tr>
+</table>
+
+</section>
+<section id="cost-grid">
+<h3>grid</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>cost</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">14.00</span></td>
+</tr>
+</table>
+
+</section>
+<section id="cost-gripper">
+<h3>gripper</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>cost</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">15.00</span></td>
+</tr>
+</table>
+
+</section>
+</section>
+<section id="coverage">
+<h2>coverage</h2>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>coverage</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td><a href="#coverage-depot" onclick="show_table(document.getElementById('coverage-depot'));">depot</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">1</span></td>
+</tr>
+<tr>
+<td><a href="#coverage-grid" onclick="show_table(document.getElementById('coverage-grid'));">grid</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">1</span></td>
+</tr>
+<tr>
+<td><a href="#coverage-gripper" onclick="show_table(document.getElementById('coverage-gripper'));">gripper</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">1</span></td>
+</tr>
+<tr>
+<td><strong>Sum (3)</strong></td>
+<td class="right"><span style="color:rgb(127,127,127)">3</span></td>
+</tr>
+</table>
+
+<p>
+The bottom row reports the sum across all domains.
+</p>
+
+<section id="coverage-depot">
+<h3>depot</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>coverage</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>p01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">1</span></td>
+</tr>
+</table>
+
+</section>
+<section id="coverage-grid">
+<h3>grid</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>coverage</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">1</span></td>
+</tr>
+</table>
+
+</section>
+<section id="coverage-gripper">
+<h3>gripper</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>coverage</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">1</span></td>
+</tr>
+</table>
+
+</section>
+</section>
+<section id="error">
+<h2>error</h2>
+
+<section id="error-error-success">
+<h3>error-success</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>error-success</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td><a href="#error-depot" onclick="show_table(document.getElementById('error-depot'));">depot</a></td>
+<td class="right"><span style="color:rgb(127,127,127)">1</span></td>
+</tr>
+<tr>
+<td><a href="#error-grid" onclick="show_table(document.getElementById('error-grid'));">grid</a></td>
+<td class="right"><span style="color:rgb(127,127,127)">1</span></td>
+</tr>
+<tr>
+<td><a href="#error-gripper" onclick="show_table(document.getElementById('error-gripper'));">gripper</a></td>
+<td class="right"><span style="color:rgb(127,127,127)">1</span></td>
+</tr>
+<tr>
+<td><strong>Sum</strong></td>
+<td class="right"><span style="color:rgb(127,127,127)">3</span></td>
+</tr>
+</table>
+
+</section>
+<section id="error-depot">
+<h3>depot</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>error</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>p01.pddl</td>
+<td>success</td>
+</tr>
+</table>
+
+</section>
+<section id="error-grid">
+<h3>grid</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>error</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td>success</td>
+</tr>
+</table>
+
+</section>
+<section id="error-gripper">
+<h3>gripper</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>error</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td>success</td>
+</tr>
+</table>
+
+</section>
+</section>
+<section id="expansions">
+<h2>expansions</h2>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>expansions</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td><a href="#expansions-depot" onclick="show_table(document.getElementById('expansions-depot'));">depot</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">17.00</span></td>
+</tr>
+<tr>
+<td><a href="#expansions-grid" onclick="show_table(document.getElementById('expansions-grid'));">grid</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">22.00</span></td>
+</tr>
+<tr>
+<td><a href="#expansions-gripper" onclick="show_table(document.getElementById('expansions-gripper'));">gripper</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">31.00</span></td>
+</tr>
+<tr>
+<td><strong>Geometric mean (3)</strong></td>
+<td class="right"><span style="color:rgb(127,127,127)">22.63</span></td>
+</tr>
+</table>
+
+<p>
+Only tasks where all algorithms have a value for "expansions" are considered. Each table entry gives the geometric mean of "expansions" for that domain. The bottom row reports the geometric mean across all domains.
+</p>
+
+<section id="expansions-depot">
+<h3>depot</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>expansions</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>p01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">17</span></td>
+</tr>
+</table>
+
+</section>
+<section id="expansions-grid">
+<h3>grid</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>expansions</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">22</span></td>
+</tr>
+</table>
+
+</section>
+<section id="expansions-gripper">
+<h3>gripper</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>expansions</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">31</span></td>
+</tr>
+</table>
+
+</section>
+</section>
+<section id="meet">
+<h2>meet</h2>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>meet</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td><a href="#meet-depot" onclick="show_table(document.getElementById('meet-depot'));">depot</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.00</span></td>
+</tr>
+<tr>
+<td><a href="#meet-grid" onclick="show_table(document.getElementById('meet-grid'));">grid</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.00</span></td>
+</tr>
+<tr>
+<td><a href="#meet-gripper" onclick="show_table(document.getElementById('meet-gripper'));">gripper</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.00</span></td>
+</tr>
+<tr>
+<td><strong>Arithmetic mean (3)</strong></td>
+<td class="right"><span style="color:rgb(127,127,127)">0.00</span></td>
+</tr>
+</table>
+
+<p>
+Only tasks where all algorithms have a value for "meet" are considered. Each table entry gives the arithmetic mean of "meet" for that domain. The bottom row reports the arithmetic mean across all domains.
+</p>
+
+<section id="meet-depot">
+<h3>depot</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>meet</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>p01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.00</span></td>
+</tr>
+</table>
+
+</section>
+<section id="meet-grid">
+<h3>grid</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>meet</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.00</span></td>
+</tr>
+</table>
+
+</section>
+<section id="meet-gripper">
+<h3>gripper</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>meet</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.00</span></td>
+</tr>
+</table>
+
+</section>
+</section>
+<section id="total_time">
+<h2>total_time</h2>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>total_<wbr>time</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td><a href="#total_time-depot" onclick="show_table(document.getElementById('total_time-depot'));">depot</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.01</span></td>
+</tr>
+<tr>
+<td><a href="#total_time-grid" onclick="show_table(document.getElementById('total_time-grid'));">grid</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.01</span></td>
+</tr>
+<tr>
+<td><a href="#total_time-gripper" onclick="show_table(document.getElementById('total_time-gripper'));">gripper</a> (1)</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.01</span></td>
+</tr>
+<tr>
+<td><strong>Geometric mean (3)</strong></td>
+<td class="right"><span style="color:rgb(127,127,127)">0.01</span></td>
+</tr>
+</table>
+
+<p>
+Only tasks where all algorithms have a value for "total_time" are considered. Each table entry gives the geometric mean of "total_time" for that domain. The bottom row reports the geometric mean across all domains.
+</p>
+
+<section id="total_time-depot">
+<h3>depot</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>total_<wbr>time</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>p01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.01</span></td>
+</tr>
+</table>
+
+</section>
+<section id="total_time-grid">
+<h3>grid</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>total_<wbr>time</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.01</span></td>
+</tr>
+</table>
+
+</section>
+<section id="total_time-gripper">
+<h3>gripper</h3>
+
+<button type="button" class="toggle-table" onclick="toggle_table(this)">Show table</button><p></p>
+
+<table class="tableborder" style="display:none">
+<tr>
+<th>total_<wbr>time</th>
+<th>20.06:01-TTBBS_<wbr>K=3</th>
+</tr>
+<tr>
+<td>prob01.pddl</td>
+<td class="right"><span style="color:rgb(127,127,127)">0.01</span></td>
+</tr>
+</table>
+
+</section>
+</section>
+</section>
+</div>
+</article></body></html>

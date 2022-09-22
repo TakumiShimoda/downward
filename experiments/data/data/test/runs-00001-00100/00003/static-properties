@@ -1,0 +1,31 @@
+{
+  "algorithm": "20.06:01-TTBBS_K=3",
+  "build_options": [],
+  "component_options": [
+    "--search",
+    "astar(goalcount())"
+  ],
+  "domain": "gripper",
+  "driver_options": [
+    "--validate",
+    "--overall-time-limit",
+    "30m",
+    "--overall-memory-limit",
+    "3584M",
+    "--overall-time-limit",
+    "10s",
+    "--overall-memory-limit",
+    "4G"
+  ],
+  "experiment_name": "test",
+  "global_revision": "3a27ea77f85f41486c57286f5e73a5cac96cc35c",
+  "id": [
+    "20.06:01-TTBBS_K=3",
+    "gripper",
+    "prob01.pddl"
+  ],
+  "local_revision": "release-20.06.0",
+  "problem": "prob01.pddl",
+  "repo": "/root/code/research/downward-projects/downward",
+  "run_dir": "runs-00001-00100/00003"
+}

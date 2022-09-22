@@ -9,8 +9,8 @@ import project
 REPO = project.get_repo_base()
 BENCHMARKS_DIR = os.environ["DOWNWARD_BENCHMARKS"]
 # SCP_LOGIN = "myname@myserver.com"
-SCP_LOGIN = "172.17.0.2"
-REMOTE_REPOS_DIR = "/infai/seipp/projects"
+# SCP_LOGIN = "172.17.0.2"
+# REMOTE_REPOS_DIR = "/infai/seipp/projects"
 
 # SUITE = ["agricola-sat18-strips", "airport", "barman-sat11-strips",
 # "barman-sat14-strips", "blocks","childsnack-sat14-strips",
@@ -96,10 +96,6 @@ exp.add_parser(exp.PLANNER_PARSER)
 exp.add_step("build", exp.build)
 exp.add_step("start", exp.start_runs)
 exp.add_fetcher(name="fetch")
-
-if not project.REMOTE:
-    exp.add_step("remove-eval-dir", shutil.rmtree, exp.eval_dir, ignore_errors=True)
-    project.add_scp_step(exp, SCP_LOGIN, REMOTE_REPOS_DIR)
 
 project.add_absolute_report(
     exp, attributes=ATTRIBUTES
